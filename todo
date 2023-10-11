@@ -1,0 +1,11 @@
+create a component that handles collecting input
+    - specify component for Personal 
+    - specify component for Education
+    - specify component for Experience
+    - specify component for Other
+
+create a preview component for the resume
+    - section to display personal details
+    - section to display Educational details
+    - section to display Experience details
+    - section to display Other details

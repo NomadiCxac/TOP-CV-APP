@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-let count = 0;
-function FormType({ fieldTitles }) {
 
-//   Initial state setup
+function FormType({ fieldTitles, headerTitle, expandable}) {
+
+
+//   So previously I worked with Alexei Darmin to understand why this initalization might be more expensive than reinitalizing a state 
 //   const initialFormData = {};
 //   for (let title of fieldTitles) {
 //     console.log(count++)
@@ -14,7 +15,6 @@ function FormType({ fieldTitles }) {
      // Initial state setup
     const initialFormData = {};
     for (let title of fieldTitles) {
-        console.log(count++)
         initialFormData[title] = '';
   }
     return initialFormData;
@@ -38,7 +38,7 @@ function FormType({ fieldTitles }) {
   };
 
   return (
-    <div>
+    <>
       <form onSubmit={handleSubmit}>
         {fieldTitles.map(title => (
           <div className="inputGroup" key={title}>
@@ -52,9 +52,9 @@ function FormType({ fieldTitles }) {
             />
           </div>
         ))}
-        <button type="submit">Submit</button>
+        {expandable && <button className={headerTitle}>{headerTitle + " +"}</button>}
       </form>
-    </div>
+    </>
   );
 }
 

@@ -12,20 +12,24 @@ function InputBlock ({title, fieldTitles, expandable}) {
     }
 
     return (
-        <div className="inputBlock">
-            <h1>{title}</h1>
-            
-            {/* If expandable is true, show the arrow */}
-            {expandable && (
-                <div onClick={toggleExpansion}>
-                    {isExpanded ? '^' : 'v'}
-                </div>
-            )}
+        <div className="inputBlock" id={"draggable" + title}>
+            <div className='headerContainer'>
+                <h2>{title}</h2>
+                
+                {/* If expandable is true, show the arrow */}
+                {expandable && (
+                    <span onClick={toggleExpansion}>
+                        {isExpanded ? '^' : 'v'}
+                    </span>
+                )}
+            </div>
 
             {/* Show FormType based on isExpanded state */}
             {(!expandable || isExpanded) && (
                 <FormType
                     fieldTitles={fieldTitles}
+                    headerTitle={title}
+                    expandable={expandable}
                 />
             )}
         </div>

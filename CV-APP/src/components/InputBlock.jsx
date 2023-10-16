@@ -23,6 +23,7 @@ function InputBlock({ title, fieldTitles, expandable }) {
         fieldTitles={fieldTitles}
         headerTitle={title}
         expandable={expandable}
+        setIsButtonVisible={setIsButtonVisible}
       />
     );
     setInfoSlices([...infoSlices, newInfoSlice]);
@@ -52,6 +53,7 @@ function InputBlock({ title, fieldTitles, expandable }) {
           fieldTitles={fieldTitles}
           headerTitle={title}
           expandable={expandable}
+          setIsButtonVisible={setIsButtonVisible}
         />
       )}
 

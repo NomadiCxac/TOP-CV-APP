@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function FormType({ fieldTitles, headerTitle, expandable }) {
+function FormType({ fieldTitles, headerTitle, expandable, setIsButtonVisible }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   let title = "";
@@ -18,6 +18,7 @@ function FormType({ fieldTitles, headerTitle, expandable }) {
   function toggleExpansion(e) {
     e.preventDefault();
     setIsExpanded(!isExpanded);
+    setIsButtonVisible(true);
   }
 
   // Handle input change
@@ -36,6 +37,7 @@ function FormType({ fieldTitles, headerTitle, expandable }) {
   function generateInfoSlice(e) {
     e.preventDefault();
     setIsExpanded(!isExpanded);
+    setIsButtonVisible(true);
   }
 
   

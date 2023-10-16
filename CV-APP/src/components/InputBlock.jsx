@@ -1,64 +1,80 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FormType from './FormType';
 
-
 function InputBlock({ title, fieldTitles, expandable }) {
-  // useState to manage visibility of the form
   const [isExpanded, setIsExpanded] = useState(false);
+  const [formTypes, setFormTypes] = useState([])
 
-  // Array to store InfoSlice components
-  const [infoSlices, setInfoSlices] = useState([]);
+  const [isButtonVisible, setIsButtonVisible] = useState(false);
 
-  const [isButtonVisible, setIsButtonVisible] = useState(true); // Added state for the button visibility
-
-  // Toggle function for the arrow
   function toggleExpansion() {
     setIsExpanded(!isExpanded);
+    setIsButtonVisible(true);
   }
 
-  // Function to add a new InfoSlice
-  function addInfoSlice() {
-    const newInfoSlice = (
-        <FormType
+  function addFormType() {
+    setIsButtonVisible(false);
+    setFormTypes((prevFormTypes) => [
+      ...prevFormTypes,
+      <FormType
+        key={prevFormTypes.length}
         fieldTitles={fieldTitles}
-        headerTitle={title}
         expandable={expandable}
+        expanded={true}
         setIsButtonVisible={setIsButtonVisible}
-      />
-    );
-    setInfoSlices([...infoSlices, newInfoSlice]);
-    setIsButtonVisible(false); // Hide the button after it's clicked
+        onRemove={() => removeFormType(prevFormTypes.length)}
+      />,
+    ]);
   }
+
+  function removeFormType(index) {
+    const updatedFormTypes = [...formTypes];
+    updatedFormTypes.splice(index, 1);
+    setFormTypes(updatedFormTypes);
+  }
+
+  // useEffect(() => {
+  //   // Log the infoSlices array whenever it changes
+  //   console.log(infoSlices);
+  // }, [infoSlices]);
+
 
   return (
-    <div className="inputBlock" id={"draggable" + title}>
+  
+    // Header Component
+    <div className="inputBlock" id={title}>
       <div className='headerContainer'>
-      <h2>{title}</h2>
-        {/* If expandable is true, show the arrow */}
+        <h2>{title}</h2>
         {expandable && (
           <span onClick={toggleExpansion}>
             {isExpanded ? '^' : 'v'}
           </span>
         )}
       </div>
-
-      {/* Render InfoSlice components based on isExpanded */}
-      {infoSlices.map((infoSlice, index) => (
-        <div key={index}>{infoSlice}</div>
-      ))}
-
-      {/* Show FormType based on isExpanded state */}
+        
       {!expandable && (
         <FormType
           fieldTitles={fieldTitles}
-          headerTitle={title}
           expandable={expandable}
-          setIsButtonVisible={setIsButtonVisible}
+          expanded={true}
         />
       )}
 
-      {expandable && isExpanded && isButtonVisible && (
-        <button onClick={addInfoSlice}>{title + ' +'}</button>
+      {expandable && !isExpanded && (
+        <div className='formsHidden'></div>
+      )}
+
+      {expandable && isExpanded && (
+        <div className='infoSliceContainer'>
+          {formTypes.map((formType, index) => (
+            <div className="infoSliceBlock" key={index}>
+              {formType}
+            </div>
+          ))}
+        </div>
+      )}
+      {expandable && isButtonVisible && (
+        <button onClick={addFormType}>{title + " +"}</button>
       )}
     </div>
   );

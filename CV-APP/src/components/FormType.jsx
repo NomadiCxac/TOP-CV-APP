@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 
-function FormType({ fieldTitles, headerTitle, expandable, setIsButtonVisible }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+function FormType({ fieldTitles, expandable, expanded, setIsButtonVisible, onRemove }) {
 
-  let title = "";
-  // State to hold the form data
+  const [title, setTitle] = useState(''); // State to hold the "School" input value
+  const [isExpanded, setIsExpanded] = useState(expanded); // Initialize with the provided expanded value
   const [formData, setFormData] = useState(() => {
-    // Initial state setup
     const initialFormData = {};
     for (let title of fieldTitles) {
       initialFormData[title] = '';
@@ -16,36 +14,28 @@ function FormType({ fieldTitles, headerTitle, expandable, setIsButtonVisible }) 
 
   // Toggle function for the arrow
   function toggleExpansion(e) {
-    e.preventDefault();
     setIsExpanded(!isExpanded);
     setIsButtonVisible(true);
   }
+
 
   // Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
-    
-    // Case if 
-    if (name == "School") {
-      title = value;
-      console.log(title);
+
+    console.log(name);
+
+    if (name === "School") {
+      setTitle(prevTitle => (value)); // Update the title state with the latest value
     }
   };
 
-  // Handle form submission
-  function generateInfoSlice(e) {
-    e.preventDefault();
-    setIsExpanded(!isExpanded);
-    setIsButtonVisible(true);
-  }
-
-  
 
   return (
     <>
-      {!expandable ? (
-        // If unexpandable, always render form inputs
+      {/* If not expandable or if expandable and isExpanded, always render form inputs */}
+      {(!expandable || (expandable && isExpanded)) && (
         <form>
           {fieldTitles.map((title) => (
             <div className="inputGroup" key={title}>
@@ -59,38 +49,23 @@ function FormType({ fieldTitles, headerTitle, expandable, setIsButtonVisible }) 
               />
             </div>
           ))}
-        </form>
-      ) : isExpanded ? (
-        // If expandable and expanded, render infoSlice and buttons
-        <>
-          <div className="infoSlice" onClick={toggleExpansion}>
-            {title}
-          </div>
-        </>
-      ) : (
-        // If expandable and not expanded, render form inputs
-        <form onSubmit={generateInfoSlice}>
-          {fieldTitles.map((title) => (
-            <div className="inputGroup" key={title}>
-              <label htmlFor={title}>{title}:</label>
-              <input
-                type="text"
-                id={title}
-                name={title}
-                value={formData[title] || ''}
-                onChange={handleChange}
-              />
-            </div>
-          ))}
+          {expandable && (
             <div className='infoSliceButtons'>
-            <button>Delete</button>
-            <button onClick={toggleExpansion}>Cancel</button>
-            <button onClick={generateInfoSlice}>Save</button>
-          </div>
+              <button>Delete</button>
+              <button onClick={toggleExpansion}>Cancel</button>
+              <button onClick={toggleExpansion}>Save</button>
+              {onRemove && <button onClick={onRemove}>Remove</button>}
+            </div>
+          )}
         </form>
       )}
+      {expandable && !isExpanded && (
+        <div className="infoSlice" id={title} onClick={toggleExpansion}>
+          {title}
+        </div>
+      )}
     </>
-  )
+  );
 }
 
 export default FormType;

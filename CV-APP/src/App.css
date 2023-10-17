@@ -69,13 +69,6 @@
   /* margin-bottom: -0.005em; */
 }
 
-.inputBlock > form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
 
 .inputBlock > form > button {
   margin-top: 1em;
@@ -85,6 +78,22 @@
 .inputBlock > button {
   margin-top: 2em;
   margin-bottom: 2em;
+}
+
+/* This CSS is necessary for the non-expandable forms */
+.inputBlock > form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.inputForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .infoSliceBlock {
@@ -121,6 +130,7 @@
   flex-direction: column;
   align-items: center;
   width: 85%;
+  margin-top: 0.5em;
   margin-bottom: 2em;
 }
 

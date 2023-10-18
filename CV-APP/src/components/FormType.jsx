@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ExpandedForm from './ExpandedForm';
 import RegularForm from './RegularForm';
 import CollapsedForm from './CollapsedForm';
@@ -6,33 +6,38 @@ import CollapsedForm from './CollapsedForm';
 function FormType({ 
   headerTitle, 
   fieldTitles, 
-  expandable}) 
-  
-  {
+  expandable,
+  onFormChange,
+  onFormListChange,
+  }) 
 
+{
+
+  const [formData, setFormData] = useState({});
   const [formList, setFormList] = useState([]);
-  const [title, setTitle] = useState(''); // State to hold the "School" input value
   const [blockIsExpanded, setBlockIsExpanded] = useState(false); // Initialize with the provided expanded value
-  const [formIsExpanded, setFormIsExpanded] = useState(false); // Initialize with the provided expanded value
   const [isButtonVisible, setIsButtonVisible] = useState(true);
-  const [formData, setFormData] = useState(() => {
-    const initialFormData = {};
-    for (let title of fieldTitles) {
-      initialFormData[title] = '';
+
+
+  function handleRegularFormChange(fieldName, value) {
+    const updatedFormData = {
+      ...formData,
+      [fieldName]: value,
+    };
+    setFormData(updatedFormData);
+    onFormChange(updatedFormData); // Inform parent of change
+  }
+
+  useEffect(() => {
+    if (onFormListChange) {
+        onFormListChange(formList);
     }
-    return initialFormData;
-  });
-
+}, [formList, onFormListChange]);
   
-
   function blockExpansionHandler() {
     setBlockIsExpanded(!blockIsExpanded); // Toggle the expansion stat
     }
   
-  function onSave () {
-    console.log()
-  }
-
   const originalFormData = useRef({}); // Using useRef to maintain the initial state
 
   function formFunctionsHandler(id, action = 'toggle') {
@@ -55,14 +60,6 @@ function FormType({
     setIsButtonVisible(action !== 'expand');
 }
 
-  // Handle input change
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({ ...prevData, [name]: value }));
-  //   if (name === "School") {
-  //     setTitle(value); // Update the title state with the latest value
-  //   }
-  // }
   
   function handleChange(formId, fieldName, value) {
     console.log(fieldName)
@@ -83,7 +80,6 @@ function FormType({
 
   function addNewForm() {
 
-   
     const newForm = {
       id: `Form ${formList.length + 1}`, // Use a unique identifier for each form
       formData: {},
@@ -120,6 +116,8 @@ function FormType({
         <RegularForm
           headerTitle={headerTitle}
           fieldTitles={fieldTitles}
+          formData={formData}
+          onChange={handleRegularFormChange}
         />
       )} 
         
@@ -160,5 +158,10 @@ function FormType({
   </>
   );
 }
+
+
+FormType.defaultProps = {
+  onFormListChange: () => {}
+};
 
 export default FormType;

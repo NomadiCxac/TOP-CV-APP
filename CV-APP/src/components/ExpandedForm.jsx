@@ -21,4 +21,5 @@ function ExpandedForm({ formId, fieldTitles, formData, handleChange, onRemove, o
       </form>
     );
   }
+  
   export default ExpandedForm;

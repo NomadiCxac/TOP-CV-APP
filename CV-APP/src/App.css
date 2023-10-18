@@ -145,3 +145,40 @@
   border-radius: 2em;
 }
 
+.cvPreview {
+  width: 65%;
+  height: 100%;
+  margin-left: 1em;
+  margin-right: 1em;
+  border-radius: 25px;
+}
+
+.resumeHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 25px;
+  background-color: blue;
+}
+
+.resumeFullName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  width: 100%;
+  height: 60%;
+  border-radius: 25px;
+}
+
+.resumeAdditionalPersonalDetailsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  color: white;
+  width: 100%;
+  height: 40%;
+  border-radius: 25px;
+}

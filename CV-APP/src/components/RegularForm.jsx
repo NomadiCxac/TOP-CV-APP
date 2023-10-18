@@ -1,18 +1,11 @@
-// RegularForm.js
-import React, { useState } from 'react';
+import React from 'react';
 
-function RegularForm({ headerTitle, fieldTitles }) {
-  const [formData, setFormData] = useState(() => {
-    const initialFormData = {};
-    for (let title of fieldTitles) {
-      initialFormData[title] = '';
-    }
-    return initialFormData;
-  });
-
+function RegularForm({ headerTitle, fieldTitles, formData, onChange }) {
+  // The local state has been removed as the parent will manage the formData now
+  
   function handleChange(e) {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    onChange(name, value);  // Calling the passed down onChange with field name and value
   }
 
   return (
@@ -25,7 +18,7 @@ function RegularForm({ headerTitle, fieldTitles }) {
             id={title}
             name={title}
             value={formData[title] || ''}
-            onChange={handleChange}
+            onChange={handleChange}  // Using the local handleChange to call the passed down onChange
           />
         </div>
       ))}

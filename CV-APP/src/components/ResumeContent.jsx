@@ -1,10 +1,7 @@
-import React from 'react';
 import ContentBlock from './ContentBlock';
 
-function ResumeContent({ title, data, onExpand }) {
-  console.log(data);
-  console.log(Array.isArray(data));
-  
+function ResumeContent({ title, data }) {
+
   return (
     <div className={"detailsContainer"} id={title}>
       <h2>{title}</h2>

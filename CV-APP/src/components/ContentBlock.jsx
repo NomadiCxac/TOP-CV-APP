@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 
 function ContentBlock ({startDate, endDate, location, header, subHeader, description}) {
 

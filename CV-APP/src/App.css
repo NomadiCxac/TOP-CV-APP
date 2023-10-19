@@ -148,9 +148,10 @@
 .cvPreview {
   width: 65%;
   height: 100%;
-  margin-left: 1em;
+  margin-left: 3em;
   margin-right: 1em;
-  border-radius: 25px;
+  background-color: white;
+  box-shadow: inset 0 0 10px #000000;
 }
 
 .resumeHeader {
@@ -159,7 +160,6 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  border-radius: 25px;
   background-color: blue;
 }
 
@@ -169,8 +169,8 @@
   justify-content: center;
   color: white;
   width: 100%;
-  height: 60%;
-  border-radius: 25px;
+  height: 50%;
+  margin-bottom: -2em;
 }
 
 .resumeAdditionalPersonalDetailsContainer {
@@ -181,4 +181,83 @@
   width: 100%;
   height: 40%;
   border-radius: 25px;
+  margin-bottom: 1em;
+}
+
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5em;
+}
+
+.detailsContainer > h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: grey;
+  margin-left: 2em;
+  margin-right: 2em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.contentBlock {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 1em;
+  width: 95%;
+  /* background-color: lightblue; */
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+.contentBlock > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: 1px solid black; */
+  margin-left: 1.5em;
+}
+
+.dateAndLocation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 150px;
+  max-width: 200px;
+  margin-left: 1em;
+  margin-right: 2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-size: 16px;
+}
+
+.specifics {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* min-width: 300px;
+  max-width: 500px; */
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.specificsHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.specificsSubHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  font-style: italic;
+  font-size: 18px;
 }

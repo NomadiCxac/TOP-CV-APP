@@ -128,7 +128,6 @@ function FormType({
               const titleKeys = Object.keys(form.formData);
               const firstValue = form.formData[titleKeys[0]];
               const secondValue = form.formData[titleKeys[1]];
-              console.log(form.formData);
               return form.isExpanded ? (
                 <ExpandedForm
                   key={form.id}
